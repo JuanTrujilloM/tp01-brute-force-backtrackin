@@ -180,6 +180,8 @@ El algoritmo requiere un espacio de **n** en memoria, siendo **n** la cantidad d
 
 Basándonos en los resultados obtenidos hasta n = 13, y con ayuda del agente de IA Gemini, llegamos a la conclusión de que comenzaría a ser inviable alrededor de n = 14 (tardando aproximadamente 2.15 horas) o n = 15 (tardando alrededor de 32.3 horas).
 
+(Para la creacion de las tablas nos apoyamos del uso de IA)
+
 ---
 
 **Preguntas guia**
@@ -353,6 +355,8 @@ cout << "Fuerza Bruta confirma: " << fuerza_bruta() << endl;
 | :--- | :--- | :--- | :--- |
 | C4 (n=4, k=3) | 18 | 3323.00 | 37076.00 |
 | K5 (n=5, k=5) | 120 | 36152.00 | 661498.00 |
+
+(Para la creacion de las tablas nos apoyamos del uso de IA)
 
 ---
 
