@@ -230,7 +230,7 @@ La coloración de grafos es un problema clásico de teoría de grafos con aplica
 La representación del grafo se realizará mediante una matriz de adyacencia. Los vértices se numeran de **0** a **n-1** y los colores de **1** a **k**.
 
 ---
-**Descripción del Problema**
+**Descripción Teórica**
 
 Enfoque de solucion: Backtracking
 
