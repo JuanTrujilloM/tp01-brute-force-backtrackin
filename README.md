@@ -358,6 +358,45 @@ cout << "Fuerza Bruta confirma: " << fuerza_bruta() << endl;
 
 **6. Analizar la complejidad temporal y espacial de ambos enfoques y elaborar conclusiones sobre la efectividad de la poda**
 
+**Complejidad Temporal**
+
+| Enfoque | Complejidad |
+|---|---|
+| Fuerza Bruta | O(k^n · n²) |
+| Backtracking | O(k^n · n) en el peor caso |
+
+**Fuerza Bruta O(k^n · n²):**
+- El loop `for (long long i = 0; i < total_comb; i++)` itera exactamente k^n veces, donde `total_comb = pow(k, n)`. Esto representa probar todas las combinaciones posibles.
+- Dentro de ese loop, el doble `for` de verificacion (`for u... for v...`) recorre hasta n² pares de vertices para validar cada combinacion, de ahi el factor n².
+
+**Backtracking O(k^n · n):**
+- El `for (int c = 1; c <= k; c++)` dentro de `bt()` genera k ramas por cada nivel. Como la recursion tiene profundidad n (un nivel por vertice), el arbol completo tiene k^n hojas en el peor caso.
+- La funcion `es_seguro()` solo recorre un `for (int u = 0; u < n; u++)`, es decir n vecinos, no n². Por eso el factor es n y no n².
+- La poda ocurre cuando `es_seguro()` retorna `false` y el `if` no entra al `bt(v+1)`, evitando explorar toda la subrama.
+
+**Complejidad Espacial**
+
+| Enfoque | Complejidad |
+|---|---|
+| Fuerza Bruta | O(n) |
+| Backtracking | O(n) |
+
+**Fuerza Bruta O(n):**
+- `vector<int> intento(n)` reserva exactamente n posiciones en memoria para guardar la combinacion actual. No acumula combinaciones anteriores.
+
+**Backtracking O(n):**
+- El arreglo global `color[20]` almacena la asignacion actual de n vertices.
+- La recursion `bt(v+1)` apila como maximo n llamadas simultaneas (una por vertice), por lo que la pila de llamadas tambien es O(n).
+
+## Conclusiones sobre la efectividad de la poda
+
+La poda del Backtracking es mas o menos efectiva dependiendo del grafo:
+
+- En **grafos densos** (muchas aristas), `es_seguro()` retorna `false` rapido y en niveles altos del arbol, descartando ramas enteras antes de explorarlas. La ganancia es muy grande.
+- En **grafos dispersos o sin aristas**, `es_seguro()` casi siempre retorna `true`, por lo que el `if` siempre entra al `bt(v+1)` y el arbol se recorre completo, comportandose igual que la Fuerza Bruta.
+
+En terminos practicos, aunque ambos tienen la misma complejidad asintotica en el peor caso, el Backtracking es consistentemente mas rapido en casos reales porque el peor caso raramente ocurre.
+
 ---
 
 **Preguntas Guia**
