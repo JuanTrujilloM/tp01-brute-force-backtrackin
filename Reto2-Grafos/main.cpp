@@ -7,6 +7,7 @@
 using namespace std;
 using namespace chrono;
 
+// Variables globales: tamano del grafo, colores disponibles, Matriz de adyacencia, asignacion actual y primera solucion encontrada
 int n, k;
 int matriz_ady[20][20];
 int color[20];
@@ -14,12 +15,14 @@ int primera_solucion[20];
 long long total_soluciones = 0;
 bool primera_guardada = false;
 
+// Reinicia el estado global entre ejecuciones de distintos grafos
 void reset_estado() {
     total_soluciones = 0;
     primera_guardada = false;
     for (int i = 0; i < 20; i++) color[i] = 0;
 }
 
+// Retorna true si el color c puede asignarse al vertice v sin conflictos.
 bool es_seguro(int v, int c) {
     for (int u = 0; u < n; u++) {
         if (matriz_ady[v][u] == 1 && color[u] == c)
@@ -28,6 +31,7 @@ bool es_seguro(int v, int c) {
     return true;
 }
 
+// Backtracking: asigna colores vertice a vertice podando ramas con conflicto.
 void bt(int v) {
     if (v == n) {
         total_soluciones++;
@@ -41,16 +45,18 @@ void bt(int v) {
         if (es_seguro(v, c)) {
             color[v] = c;
             bt(v + 1);
-            color[v] = 0;
+            color[v] = 0; // backtrack
         }
     }
 }
 
+// Fuerza bruta: prueba las k^n combinaciones posibles y cuenta las validas.
 long long fuerza_bruta() {
     long long conteo = 0;
     long long total_comb = (long long)pow(k, n);
 
     for (long long i = 0; i < total_comb; i++) {
+        // Decodifica i en base k para obtener una asignacion de colores
         vector<int> intento(n);
         long long temp = i;
         for (int j = 0; j < n; j++) {
@@ -76,6 +82,7 @@ struct Resultado {
     double tiempo_fb_us;
 };
 
+// Carga el grafo, ejecuta ambos enfoques midiendo tiempos y reporta resultados
 Resultado ejecutar_grafo(const string& nombre,
                          int _n, int _k,
                          int datos[][20],
@@ -118,6 +125,7 @@ Resultado ejecutar_grafo(const string& nombre,
 }
 
 int main() {
+    // Grafo 1: ciclo C4, numero cromatico = 2
     int g1[20][20] = {
         {0, 1, 0, 1},
         {1, 0, 1, 0},
@@ -126,6 +134,7 @@ int main() {
     };
     auto r1 = ejecutar_grafo("Grafo 1: ciclo C4", 4, 3, g1);
 
+    // Grafo 2: completo K5, numero cromatico = 5
     int g2[20][20] = {
         {0, 1, 1, 1, 1},
         {1, 0, 1, 1, 1},

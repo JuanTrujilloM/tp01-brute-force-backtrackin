@@ -5,16 +5,17 @@
 
 using namespace std;
 
-
+// Almacena el conteo de permutaciones generadas, validas y el tiempo de ejecucion
 struct Resultado {
     long long total_generadas;
     long long total_validas;
     double tiempo_ms;
 };
 
+// Genera todas las n! permutaciones de A, filtra las validas y mide el tiempo.
 Resultado resolverPermutaciones(vector<int> A, bool imprimir_listado) {
-    sort(A.begin(), A.end());
-    
+    sort(A.begin(), A.end()); // ordena para comenzar desde la permutacion menor
+
     long long total_generadas = 0;
     long long total_validas = 0;
 
@@ -23,14 +24,15 @@ Resultado resolverPermutaciones(vector<int> A, bool imprimir_listado) {
     do {
         total_generadas++;
         bool valida = true;
-        
+
+        // Verifica la restriccion P[i] <= 2 * P[i+1] para toda la permutacion
         for (size_t i = 0; i < A.size() - 1; ++i) {
             if (A[i] > 2 * A[i+1]) {
                 valida = false;
                 break;
             }
         }
-        
+
         if (valida) {
             total_validas++;
             if (imprimir_listado) {
@@ -53,12 +55,13 @@ Resultado resolverPermutaciones(vector<int> A, bool imprimir_listado) {
 }
 
 int main() {
+    // Ejemplo base del enunciado
     vector<int> A = {1, 3, 4};
     cout << "Entrada: n = " << A.size() << ", A = {1, 3, 4}\n \n";
     resolverPermutaciones(A, true);
-    
-    cout << "Medicion experimental de tiempos\n";
 
+    // Medicion experimental con distintos valores de n
+    cout << "Medicion experimental de tiempos\n";
     vector<int> valores_n = {5, 8, 10, 11, 12, 13};
     vector<Resultado> resultados;
 
@@ -70,11 +73,11 @@ int main() {
         for (int i = 1; i <= n; i++) fact *= i;
         cout << "\nn = " << n << " (n! = " << fact << ")\n";
 
-        Resultado r = resolverPermutaciones(conjunto, false);
-        resultados.push_back(r);
+        resultados.push_back(resolverPermutaciones(conjunto, false));
     }
 
-    cout << "\n------------------------------------------\n";         
+    // Tabla resumen de tiempos para cada valor de n
+    cout << "\n------------------------------------------\n";
     cout << "          TABLA RESUMEN DE TIEMPOS        \n";
     cout << "------------------------------------------\n";
     cout << "  n  | Permutaciones |  Validas | Tiempo (ms)\n";
