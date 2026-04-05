@@ -230,6 +230,27 @@ La coloración de grafos es un problema clásico de teoría de grafos con aplica
 La representación del grafo se realizará mediante una matriz de adyacencia. Los vértices se numeran de **0** a **n-1** y los colores de **1** a **k**.
 
 ---
+**Descripción del Problema**
+
+Enfoque de solucion: Backtracking
+
+El **Backtracking** es una tecnica de busqueda sistematica que construye soluciones de forma incremental, abandonando (podando) una rama del arbol de busqueda en cuanto detecta que no puede conducir a una solucion valida. A diferencia de la Fuerza Bruta, no espera tener una solucion completa para evaluarla.
+
+En este problema se aplica de la siguiente forma:
+
+1. Se intenta asignar un color a cada vertice, uno a la vez, en orden de 0 a n-1.
+2. Antes de asignar un color c al vertice v, se verifica con `es_seguro(v, c)` que ningun vecino adyacente ya tenga ese color.
+3. Si el color es seguro, se asigna y se avanza al siguiente vertice recursivamente.
+4. Si no existe ningun color valido para el vertice actual, se retrocede (backtrack) al vertice anterior y se prueba el siguiente color disponible.
+5. Cuando se llega al vertice n (todos asignados), se cuenta la solucion como valida.
+
+Este proceso explora un arbol de decision de profundidad n con k ramas por nivel, podando ramas completas cuando se detecta un conflicto temprano.
+
+Comparacion con Fuerza Bruta
+
+La Fuerza Bruta prueba las k^n combinaciones posibles sin ningun criterio de descarte. El Backtracking, al podar ramas invalidas apenas se detecta un conflicto, puede reducir drasticamente el numero de combinaciones exploradas, especialmente en grafos densos donde los conflictos aparecen en niveles altos del arbol.
+
+---
 
 **Pseudocodigo**
 
