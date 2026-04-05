@@ -386,3 +386,23 @@ Para que esto funcione en la lógica de Backtracking, se debe implementar una **
     * **Si el vértice v+1 responde con una solución no valida**, el vertice v continúa probando el siguiente color disponible.
 
 ---
+
+**¿Qué relación existe entre este problema y el Número Cromático del grafo?**
+
+El Número Cromático de un grafo (χ(G)) es el mínimo número de colores necesarios para colorearlo válidamente, es decir, que ningún par de vértices adyacentes comparta color.
+
+La relación con el problema es directa:
+
+* El algoritmo de k-coloración resuelve la pregunta: ¿es posible colorear este grafo con exactamente k colores?
+* Si k >= χ(G), existe al menos una solución válida.
+* Si k < χ(G), el algoritmo no encontrará ninguna solución.
+
+En otras palabras, el número cromático es el k mínimo para el cual el Backtracking retorna al menos una coloración válida. Encontrar χ(G) equivale a ir probando k = 1, 2, 3... hasta que el algoritmo encuentre solución por primera vez.
+
+**Ejemplos concretos:**
+
+* Un grafo sin aristas tiene χ(G) = 1 (un solo color basta).
+* Un ciclo par (C4) tiene χ(G) = 2.
+* Un grafo completo K_n tiene χ(G) = n (todos se conectan entre sí, cada vértice necesita un color distinto).
+
+---
