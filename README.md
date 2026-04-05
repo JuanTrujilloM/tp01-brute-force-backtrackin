@@ -24,6 +24,20 @@ El programa debe:
 * **(a)** Generar **TODAS** las permutaciones del conjunto mediante fuerza bruta (enumeración exhaustiva mediante el factorial de permutaciones).
 * **(b)** Filtrar las que cumplen la restricción.
 * **(c)** Reportar el total de permutaciones generadas y el total de permutaciones válidas, y listar estas últimas.
+---
+
+**Descripción Teórica**
+
+Enfoque de solucion: Fuerza Bruta
+
+La **Fuerza Bruta** es una tecnica algorítmica que consiste en enumerar exhaustivamente todas las posibles soluciones de un problema y verificar cuales de ellas cumplen las condiciones requeridas. No descarta posibilidades anticipadamente: primero genera todas y luego filtra.
+
+En este problema se aplica de la siguiente forma:
+
+1. Se ordenan los elementos de forma ascendente para garantizar comenzar desde la permutacion lexicograficamente menor.
+2. Se generan todas las n! permutaciones usando `next_permutation` de la STL, que garantiza recorrer exactamente el factorial de permutaciones sin repeticiones.
+3. Por cada permutacion generada se verifica si cumple la restriccion `P[i] <= 2 * P[i+1]`.
+4. Se reportan las permutaciones validas, el total generado y el total valido.
 
 ---
 
